@@ -1,4 +1,4 @@
-name: Claude AI Review
+name: Claude Review
 
 on:
   pull_request:
@@ -13,15 +13,17 @@ jobs:
       contents: read
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Get PR Diff
+      - name: Generate PR Diff
         run: |
           git fetch origin main
           git diff origin/main...HEAD > pr.diff
 
-      - name: Run Claude Review
+      - name: Run Review
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
