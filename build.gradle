@@ -1,0 +1,106 @@
+//plugins {
+//    id 'java'
+//    id 'org.springframework.boot' version '4.0.5'
+//    id 'io.spring.dependency-management' version '1.1.7'
+//}
+//
+//group = 'org.example'
+//version = '0.0.1-SNAPSHOT'
+//description = 'TelIngestionService'
+//
+//java {
+//    toolchain {
+//        languageVersion = JavaLanguageVersion.of(17)
+//    }
+//}
+//
+//repositories {
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.2.0'
+//    implementation 'org.springframework.kafka:spring-kafka'
+//    implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    compileOnly 'org.projectlombok:lombok'
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//    implementation 'org.springframework.boot:spring-boot-starter-validation'
+//    annotationProcessor 'org.projectlombok:lombok'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+//    testCompileOnly 'org.projectlombok:lombok'
+//    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+//    testAnnotationProcessor 'org.projectlombok:lombok'
+//
+//
+//    // MCP Server
+//    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+//
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//}
+//
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'org.example'
+version = '0.0.1-SNAPSHOT'
+description = 'TelIngestionService'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+    springAiVersion = "1.1.0-M1"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+    }
+}
+
+dependencies {
+
+    implementation 'io.github.resilience4j:resilience4j-spring-boot3:2.2.0'
+
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    // MCP
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webmvc'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
